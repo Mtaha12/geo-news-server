@@ -8,8 +8,14 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
-app.use(cors());
-app.use('/api/articles', require('./routes/newsRoutes')); // Routes
+
+// CORS setup - Allow requests from your Vercel frontend only
+app.use(cors({
+  origin: 'https://https://geo-news-client-dxl5.vercel.app/' 
+}));
+
+// Routes
+app.use('/api/articles', require('./routes/newsRoutes'));
 
 // Root route
 app.get('/', (req, res) => {
@@ -17,9 +23,12 @@ app.get('/', (req, res) => {
 });
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log("MongoDB connection error:", err));
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log('MongoDB connection error:', err));
 
 // Start the server
 app.listen(PORT, () => {
