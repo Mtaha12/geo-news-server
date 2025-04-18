@@ -9,9 +9,10 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json());
 
-// CORS setup - Allow requests from your Vercel frontend only
+
 app.use(cors({
-  origin: 'https://https://geo-news-client.vercel.app/' 
+  origin: 'https://geo-news-client.vercel.app', 
+  credentials: true // optional: useful if sending cookies
 }));
 
 // Routes
