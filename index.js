@@ -11,7 +11,7 @@ app.use(express.json());
 
 // CORS setup - Allow requests from your Vercel frontend only
 app.use(cors({
-  origin: 'https://https://geo-news-client-dxl5.vercel.app/' 
+  origin: 'https://https://geo-news-client.vercel.app/' 
 }));
 
 // Routes
